@@ -22,7 +22,7 @@ from . import options as apquest_options  # rename due to a name conflict with W
 # This implementation in particular has the following additional files, each covering one topic:
 # regions.py, locations.py, rules.py, items.py, options.py and web_world.py.
 # It is recommended that you read these in that specific order, then come back to the world class.
-class APQuestWorld(World):
+class IslandRacerWorld(World):
     """
     APQuest is a minimal 8bit-era inspired adventure game with grid-like movement.
     Good games don't need more than six checks.
@@ -31,10 +31,10 @@ class APQuestWorld(World):
     # The docstring should contain a description of the game, to be displayed on the WebHost.
 
     # You must override the "game" field to say the name of the game.
-    game = "APQuest"
+    game = "Island Racer"
 
     # The WebWorld is a definition class that governs how this world will be displayed on the website.
-    web = web_world.APQuestWebWorld()
+    web = web_world.IslandRacerWebWorld()
 
     # This is how we associate the options defined in our options.py with our world.
     # (Note: options.py has been imported as "apquest_options" at the top of this file to avoid a name conflict)
