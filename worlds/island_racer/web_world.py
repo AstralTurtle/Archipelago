@@ -8,11 +8,11 @@ from .options import option_groups, option_presets
 class IslandRacerWebWorld(WebWorld):
     # We need to override the "game" field of the WebWorld superclass.
     # This must be the same string as the regular World class.
-    game = "APQuest"
+    game = "Island Racer"
 
     # Your game pages will have a visual theme (affecting e.g. the background image).
     # You can choose between dirt, grass, grassFlowers, ice, jungle, ocean, partyTime, and stone.
-    theme = "grassFlowers"
+    theme = "ocean"
 
     # A WebWorld can have any number of tutorials, but should always have at least an English setup guide.
     # Many WebWorlds just have one setup guide, but some have multiple, e.g. for different languages.
@@ -26,23 +26,12 @@ class IslandRacerWebWorld(WebWorld):
         "English",
         "setup_en.md",
         "setup/en",
-        ["NewSoupVi"],
-    )
-    # Let's have our setup guide in German as well.
-    # Do not translate the title and description!
-    # WebHost needs them to be the same to identify that it is the same tutorial.
-    # This lets it display the tutorials more compactly.
-    setup_de = Tutorial(
-        "Multiworld Setup Guide",
-        "A guide to setting up APQuest for MultiWorld.",
-        "German",
-        "setup_de.md",
-        "setup/de",
-        ["NewSoupVi"],
+        ["AstralTurtle", "Techno3D"],
     )
 
+
     # We add these tutorials to our WebWorld by overriding the "tutorials" field.
-    tutorials = [setup_en, setup_de]
+    tutorials = [setup_en]
 
     # If we have option groups and/or option presets, we need to specify these here as well.
     option_groups = option_groups
