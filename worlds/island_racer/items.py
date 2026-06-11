@@ -35,11 +35,11 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Forest Pass": ItemClassification.progression,
     "Hype": ItemClassification.filler,
     "Progressive Stats Upgrade": ItemClassification.progression,
-    "Launch and Boost Pads - Volcano": ItemClassification.progression,
-    "Launch and Boost Pads - Mountain": ItemClassification.progression,
-    "Launch and Boost Pads - Lake": ItemClassification.progression,
-    "Launch and Boost Pads - Forest": ItemClassification.progression,
-    "Launch and Boost Pads - Desert": ItemClassification.progression,
+    "Launch and Boost Pads - Volcano": ItemClassification.useful,
+    "Launch and Boost Pads - Mountain": ItemClassification.useful,
+    "Launch and Boost Pads - Lake": ItemClassification.useful,
+    "Launch and Boost Pads - Forest": ItemClassification.useful,
+    "Launch and Boost Pads - Desert": ItemClassification.useful,
 }
 
 
@@ -95,7 +95,7 @@ def create_all_items(world: IslandRacerWorld) -> None:
         world.create_item("Desert Pass"),
         world.create_item("Lake Pass"),
         world.create_item("Forest Pass"),
-        *[world.create_item("Progressive Stats Upgrade")] * 3,
+        *[world.create_item("Progressive Stats Upgrade") for _ in range(3)],
         world.create_item("Launch and Boost Pads - Volcano") ,
         world.create_item("Launch and Boost Pads - Mountain") ,
         world.create_item("Launch and Boost Pads - Lake") ,
