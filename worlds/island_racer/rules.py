@@ -6,11 +6,11 @@ from rule_builder.options import OptionFilter
 from rule_builder.rules import Has, HasAll, Rule
 
 if TYPE_CHECKING:
-    from .world import IslandRacerWorld
+    from .world import TimeAttackIslandsWorld
 
 from rule_builder.rules import Rule
 
-class MedalTierReached(Rule["IslandRacerWorld"], game="Island Racer"):
+class MedalTierReached(Rule["TimeAttackIslandsWorld"], game="Time Attack Islands"):
     island: str
 
     def _instantiate(self, world):
@@ -28,7 +28,7 @@ class MedalTierReached(Rule["IslandRacerWorld"], game="Island Racer"):
         def _evaluate(self, state) -> bool:
             return state.has_loc(f"{self.island} Island - {self.tier} Medal", self.player)
 
-def set_all_rules(world: IslandRacerWorld) -> None:
+def set_all_rules(world: TimeAttackIslandsWorld) -> None:
     # In order for AP to generate an item layout that is actually possible for the player to complete,
     # we need to define rules for our Entrances and Locations.
     # Note: Regions do not have rules, the Entrances connecting them do!
@@ -39,7 +39,7 @@ def set_all_rules(world: IslandRacerWorld) -> None:
     set_completion_condition(world)
 
 
-def set_all_entrance_rules(world: IslandRacerWorld) -> None:
+def set_all_entrance_rules(world: TimeAttackIslandsWorld) -> None:
     # First, we need to actually grab our entrances. Luckily, there is a helper method for this.
 
 
@@ -97,9 +97,9 @@ def set_all_entrance_rules(world: IslandRacerWorld) -> None:
     # Rule Builder is quite comprehensive, and even if you have really esoteric rules,
     # you can make custom rules by subclassing CustomRule.
 
-def set_all_location_rules(world: IslandRacerWorld) -> None:
+def set_all_location_rules(world: TimeAttackIslandsWorld) -> None:
     
-    for island in IslandRacerWorld.ISLANDS:
+    for island in TimeAttackIslandsWorld.ISLANDS:
         gold_loc = world.get_location(f"{island} Island - Gold Medal")
         world.set_rule(gold_loc, Has("Progressive Stats"), 2)
 
@@ -121,7 +121,7 @@ def set_all_location_rules(world: IslandRacerWorld) -> None:
  
 
 
-def set_completion_condition(world: IslandRacerWorld) -> None:
+def set_completion_condition(world: TimeAttackIslandsWorld) -> None:
     # Finally, we need to set a completion condition for our world, defining what the player needs to win the game.
     # For this, we can use world.set_completion_rule.
 

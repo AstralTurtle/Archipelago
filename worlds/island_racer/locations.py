@@ -7,7 +7,7 @@ from BaseClasses import ItemClassification, Location
 from . import items
 
 if TYPE_CHECKING:
-    from .world import IslandRacerWorld
+    from .world import TimeAttackIslandsWorld
 
 # Every location must have a unique integer ID associated with it.
 # We will have a lookup from location name to ID here that, in world.py, we will import and bind to the world class.
@@ -43,8 +43,8 @@ LOCATION_NAME_TO_ID = {
 
 # Each Location instance must correctly report the "game" it belongs to.
 # To make this simple, it is common practice to subclass the basic Location class and override the "game" field.
-class IslandRacerLocation(Location):
-    game = "Island Racer"
+class TimeAttackIslandsLocation(Location):
+    game = "Time Attack Islands"
 
 
 # Let's make one more helper method before we begin actually creating locations.
@@ -57,12 +57,12 @@ def get_location_names_with_ids(location_names: list[str]) -> dict[str, int | No
     return {location_name: LOCATION_NAME_TO_ID[location_name] for location_name in location_names}
 
 
-def create_all_locations(world: IslandRacerWorld) -> None:
+def create_all_locations(world: TimeAttackIslandsWorld) -> None:
     create_regular_locations(world)
     create_events(world)
 
 
-def create_regular_locations(world: IslandRacerWorld) -> None:
+def create_regular_locations(world: TimeAttackIslandsWorld) -> None:
     # Finally, we need to put the Locations ("checks") into their regions.
     # Once again, before we do anything, we can grab our regions we created by using world.get_region()
     menu = world.get_region("Menu")
@@ -83,11 +83,11 @@ def create_regular_locations(world: IslandRacerWorld) -> None:
     forest_locations = get_location_names_with_ids(["Forest Island - Bronze Medal", "Forest Island - Silver Medal", "Forest Island - Gold Medal", "Forest Island - Platinum Medal", "Forest Island - Diamond Medal"])
     desert_locations = get_location_names_with_ids(["Desert Island - Bronze Medal", "Desert Island - Silver Medal", "Desert Island - Gold Medal", "Desert Island - Platinum Medal", "Desert Island - Diamond Medal"])
 
-    volcano.add_locations(volcano_locations, IslandRacerLocation)
-    mountain.add_locations(mountain_locations, IslandRacerLocation)
-    lake.add_locations(lake_locations, IslandRacerLocation)
-    forest.add_locations(forest_locations, IslandRacerLocation)
-    desert.add_locations(desert_locations, IslandRacerLocation)
+    volcano.add_locations(volcano_locations, TimeAttackIslandsLocation)
+    mountain.add_locations(mountain_locations, TimeAttackIslandsLocation)
+    lake.add_locations(lake_locations, TimeAttackIslandsLocation)
+    forest.add_locations(forest_locations, TimeAttackIslandsLocation)
+    desert.add_locations(desert_locations, TimeAttackIslandsLocation)
 
 
 
@@ -96,9 +96,9 @@ def create_regular_locations(world: IslandRacerWorld) -> None:
     # top_middle_room_locations = get_location_names_with_ids(["Top Middle Chest"])
     # if world.options.hammer:
     #     top_middle_room = world.get_region("Top Middle Room")
-    #     top_middle_room.add_locations(top_middle_room_locations, IslandRacerLocation)
+    #     top_middle_room.add_locations(top_middle_room_locations, TimeAttackIslandsLocation)
     # else:
-    #     menu.add_locations(top_middle_room_locations, IslandRacerLocation)
+    #     menu.add_locations(top_middle_room_locations, TimeAttackIslandsLocation)
 
     # Locations may exist only if the player enables certain options.
     # In our case, the extra_starting_chest option adds the Bottom Left Extra Chest location.
@@ -107,13 +107,13 @@ def create_regular_locations(world: IslandRacerWorld) -> None:
         # exist, it must still always be present in the world's location_name_to_id.
         # Whether the location actually exists in the seed is purely determined by whether we create and add it here.
         # bottom_left_extra_chest = get_location_names_with_ids(["Bottom Left Extra Chest"])
-        # menu.add_locations(bottom_left_extra_chest, IslandRacerLocation)
+        # menu.add_locations(bottom_left_extra_chest, TimeAttackIslandsLocation)
 
 
-def create_events(world: IslandRacerWorld) -> None:
+def create_events(world: TimeAttackIslandsWorld) -> None:
     tiers = ["Bronze", "Silver", "Gold", "Diamond", "Platinum"]
     islands = ["Volcano", "Mountain", "Desert", "Lake", "Forest"]
 
     for island in islands:
         region = world.get_region(f"{island} Island")
-        region.add_event(f"{island} Island Completed", "Island Completed", location_type=IslandRacerLocation)
+        region.add_event(f"{island} Island Completed", "Island Completed", location_type=TimeAttackIslandsLocation)

@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from BaseClasses import Item, ItemClassification
 
 if TYPE_CHECKING:
-    from .world import IslandRacerWorld
+    from .world import TimeAttackIslandsWorld
 
 # Every item must have a unique integer ID associated with it.
 # We will have a lookup from item name to ID here that, in world.py, we will import and bind to the world class.
@@ -46,14 +46,14 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
 
 # Each Item instance must correctly report the "game" it belongs to.
 # To make this simple, it is common practice to subclass the basic Item class and override the "game" field.
-class IslandRacerItem(Item):
-    game = "Island Racer"
+class TimeAttackIslandsItem(Item):
+    game = "Time Attack Islands"
 
 
 # Ontop of our regular itempool, our world must be able to create arbitrary amounts of filler as requested by core.
 # To do this, it must define a function called world.get_filler_item_name(), which we will define in world.py later.
 # For now, let's make a function that returns the name of a random filler item here in items.py.
-def get_random_filler_item_name(world: IslandRacerWorld) -> str:
+def get_random_filler_item_name(world: TimeAttackIslandsWorld) -> str:
     # APQuest has an option called "trap_chance".
     # This is the percentage chance that each filler item is a Math Trap instead of a Confetti Cannon.
     # For this purpose, we need to use a random generator.
@@ -66,7 +66,7 @@ def get_random_filler_item_name(world: IslandRacerWorld) -> str:
     return "Hype"
 
 
-def create_item_with_correct_classification(world: IslandRacerWorld, name: str) -> IslandRacerItem:
+def create_item_with_correct_classification(world: TimeAttackIslandsWorld, name: str) -> TimeAttackIslandsItem:
     # Our world class must have a create_item() function that can create any of our items by name at any time.
     # So, we make this helper function that creates the item by name with the correct classification.
     # Note: This function's content could just be the contents of world.create_item in world.py directly,
@@ -76,11 +76,11 @@ def create_item_with_correct_classification(world: IslandRacerWorld, name: str) 
     # It is perfectly normal and valid for an item's classification to differ based on the player's options.
     # In our case, Health Upgrades are only relevant to logic (and thus labeled as "progression") in hard mode.
 
-    return IslandRacerItem(name, classification, ITEM_NAME_TO_ID[name], world.player)
+    return TimeAttackIslandsItem(name, classification, ITEM_NAME_TO_ID[name], world.player)
 
 
 # With those two helper functions defined, let's now get to actually creating and submitting our itempool.
-def create_all_items(world: IslandRacerWorld) -> None:
+def create_all_items(world: TimeAttackIslandsWorld) -> None:
     # This is the function in which we will create all the items that this world submits to the multiworld item pool.
     # There must be exactly as many items as there are locations.
     # In our case, there are either six or seven locations.
