@@ -35,7 +35,7 @@ def set_all_rules(world: TimeAttackIslandsWorld) -> None:
     # We'll do entrances first, then locations, and then finally we set our victory condition.
 
     set_all_entrance_rules(world)
-    # set_all_location_rules(world)
+    set_all_location_rules(world)
     set_completion_condition(world)
 
 
@@ -55,10 +55,10 @@ def set_all_entrance_rules(world: TimeAttackIslandsWorld) -> None:
     # which requires slashing a bush with the Sword.
     # For this, we need a rule that says "player has a Sword".
     # We can use a "Has"-type rule from the rule_builder module for this.
-    can_access_mountain = Has("Mountain Pass")
-    can_access_desert = Has("Desert Pass")
-    can_access_lake = Has("Lake Pass")
-    can_access_forest = Has("Forest Pass")
+    can_access_mountain = Has("Mountain Pass") & Has("Progressive Stats Upgrade", 1)
+    can_access_desert = Has("Desert Pass")  & Has("Progressive Stats Upgrade", 1)
+    can_access_lake = Has("Lake Pass")  & Has("Progressive Stats Upgrade", 1)
+    can_access_forest = Has("Forest Pass")  & Has("Progressive Stats Upgrade", 1)
 
 
     # Now we can set our "can_destroy_bush" rule to the entrance which requires slashing a bush to clear the path.
@@ -67,6 +67,7 @@ def set_all_entrance_rules(world: TimeAttackIslandsWorld) -> None:
     world.set_rule(desert_entrance, can_access_desert)
     world.set_rule(lake_entrance, can_access_lake)
     world.set_rule(forest_entrance, can_access_forest)
+    
 
 
 
@@ -101,17 +102,13 @@ def set_all_location_rules(world: TimeAttackIslandsWorld) -> None:
     
     for island in TimeAttackIslandsWorld.ISLANDS:
         gold_loc = world.get_location(f"{island} Island - Gold Medal")
-        world.set_rule(gold_loc, Has("Progressive Stats"), 2)
+        world.set_rule(gold_loc, Has("Progressive Stats Upgrade", 1))
 
         platinum_loc = world.get_location(f"{island} Island - Platinum Medal")
         diamond_loc = world.get_location(f"{island} Island - Diamond Medal")
 
-        world.set_rule(platinum_loc, Has("Progressive Stats"), 3)
-        world.set_rule(diamond_loc, Has("Progressive Stats"), 3)
-    
-
-    tier_threshold = world.options.medal_tier_required.value
-    qualifying_tiers = world.MEDAL_TIERS[tier_threshold:]
+        world.set_rule(platinum_loc, Has("Progressive Stats Upgrade", 2))
+        world.set_rule(diamond_loc, Has("Progressive Stats Upgrade", 3))
 
     for island in world.ISLANDS:
         world.set_rule(
